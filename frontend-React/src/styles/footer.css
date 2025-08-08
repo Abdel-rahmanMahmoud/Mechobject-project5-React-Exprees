@@ -1,0 +1,39 @@
+/* Footer */
+.footer {
+  background-color: #222d32;
+  padding: 40px 0 20px;
+  margin-top: 50px;
+}
+
+.footer h5 {
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.footer p {
+  color: #cccccc;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #007bff;
+}
+
+.footer hr {
+  border-color: #333;
+  margin: 32px 0 16px;
+}

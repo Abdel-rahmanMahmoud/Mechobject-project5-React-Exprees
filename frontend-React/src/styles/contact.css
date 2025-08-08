@@ -1,0 +1,103 @@
+/* Global Styles */
+body {
+    background-color: #1a2226;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Contact Card */
+.contact-card {
+    background-color: #222d32;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Form Styles */
+.form-label {
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    background-color: #1a2226;
+    border: 2px solid #333;
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    background-color: #1a2226;
+    border-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control::placeholder {
+    color: #888;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 12px 40px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Contact Info */
+.contact-info {
+    background-color: #222d32;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.contact-info h5 {
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.contact-info p {
+    color: #cccccc;
+    margin: 0;
+}
+
+/* Alert Messages */
+.alert {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-card {
+        padding: 2rem;
+    }
+    
+    .contact-info {
+        padding: 1.5rem;
+    }
+}
