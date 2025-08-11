@@ -1,22 +1,15 @@
-/node_modules
-/.env
-/20241225000001-demo-users.js
-/.pnp
+node_modules/
+.env*
+!.env.example
+20241225000001-demo-users.js
+
+.pnp
 .pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
+coverage/
+build/
 .DS_Store
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+.env.*.local
+npm-debug.log
+yarn-debug.log
+yarn-error.log
