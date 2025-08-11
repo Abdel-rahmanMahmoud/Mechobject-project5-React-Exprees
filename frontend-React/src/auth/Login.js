@@ -5,7 +5,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css';
 
-const REACT_APP_API_BASE_URL = process.env.REACT_APP_REACT_APP_API_BASE_URL ;
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL ;
 console.log(`REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL}`);
 console.log(process.env);
 
