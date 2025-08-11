@@ -5,7 +5,9 @@ import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css';
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const API_BASE_URL = process.env.API_BASE_URL ;
+console.log(`API_BASE_URL: ${API_BASE_URL}`);
+
 
 function Login() {
   const [email, setEmail] = useState('');
