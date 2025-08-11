@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Card, Spinner, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -23,7 +23,7 @@ const Favorites = () => {
 
   const loadCart = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/cart`, getFetchOptions());
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions());
       if (response.ok) {
         const data = await response.json();
         setCart(data.data.cartItems.map((item) => item.productId));
@@ -36,7 +36,7 @@ const Favorites = () => {
   const loadFavorites = async () => {
     try {
       await loadCart();
-      const response = await fetch(`${API_BASE_URL}/favorites`, getFetchOptions());
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/favorites`, getFetchOptions());
       if (response.ok) {
         const data = await response.json();
         setFavorites(data.data.favorites);
@@ -52,7 +52,7 @@ const Favorites = () => {
 
   const handleAddToCart = async (productId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/cart`, getFetchOptions({
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId, quantity: 1 })
@@ -69,7 +69,7 @@ const Favorites = () => {
 
   const handleRemoveFromCart = async (productId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/cart/${productId}`, getFetchOptions({ method: "DELETE" }));
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/cart/${productId}`, getFetchOptions({ method: "DELETE" }));
       if (response.ok) {
         setCart((prev) => prev.filter((id) => id !== productId));
       } else {
@@ -82,7 +82,7 @@ const Favorites = () => {
 
   const handleRemoveFromFavorites = async (productId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/favorites/${productId}`, getFetchOptions({ method: "DELETE" }));
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/favorites/${productId}`, getFetchOptions({ method: "DELETE" }));
       if (response.ok) {
         loadFavorites();
       } else {

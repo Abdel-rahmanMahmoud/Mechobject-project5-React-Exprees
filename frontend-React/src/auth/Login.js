@@ -5,8 +5,8 @@ import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css';
 
-const API_BASE_URL = process.env.API_BASE_URL ;
-console.log(`API_BASE_URL: ${API_BASE_URL}`);
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_REACT_APP_API_BASE_URL ;
+console.log(`REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL}`);
 
 
 function Login() {
@@ -24,7 +24,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${API_BASE_URL}/auth/login`, {
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -63,7 +63,7 @@ function Login() {
         avatar: user.photoURL || 'profile.png'
       };
 
-      const response = await fetch(`${API_BASE_URL}/auth/firebase-login`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/auth/firebase-login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

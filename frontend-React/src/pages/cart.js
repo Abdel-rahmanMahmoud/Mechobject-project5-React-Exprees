@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "../styles/cart.css";
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Cart = () => {
 
   const loadCartItems = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/cart`, getFetchOptions());
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions());
       const data = await res.json();
       setCartItems(data.data.cartItems);
     } catch (error) {
@@ -48,7 +48,7 @@ const Cart = () => {
 
     try {
       await fetch(
-        `${API_BASE_URL}/cart/${productId}`,
+        `${REACT_APP_API_BASE_URL}/cart/${productId}`,
         getFetchOptions({
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -64,7 +64,7 @@ const Cart = () => {
   const removeFromCart = async (productId) => {
     try {
       await fetch(
-        `${API_BASE_URL}/cart/${productId}`,
+        `${REACT_APP_API_BASE_URL}/cart/${productId}`,
         getFetchOptions({ method: "DELETE" })
       );
       loadCartItems();
@@ -80,7 +80,7 @@ const Cart = () => {
 
   const logout = async () => {
     try {
-      await fetch(`${API_BASE_URL}/auth/logout`, {
+      await fetch(`${REACT_APP_API_BASE_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

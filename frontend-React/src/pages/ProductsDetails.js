@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import "../styles/productsDetails.css"
 
 export default function ProductDetails() {
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
   const navigate = useNavigate();
   const location = useLocation();
   const { id: idParam } = useParams();
@@ -47,12 +47,12 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
 
   async function loadUserData() {
     try {
-      const favRes = await fetch(`${API_BASE_URL}/favorites`, getFetchOptions());
+      const favRes = await fetch(`${REACT_APP_API_BASE_URL}/favorites`, getFetchOptions());
       if (favRes.ok) {
         const d = await favRes.json();
         setFavorites(d.data.favorites.map((f) => f.productId));
       }
-      const cartRes = await fetch(`${API_BASE_URL}/cart`, getFetchOptions());
+      const cartRes = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions());
       if (cartRes.ok) {
         const d = await cartRes.json();
         setCart(d.data.cartItems.map((i) => i.productId));
@@ -69,7 +69,7 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
     setLoading(true);
     try {
       await loadUserData();
-      const res = await fetch(`${API_BASE_URL}/products/${productId}`);
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/products/${productId}`);
       if (!res.ok) throw new Error();
       const data = await res.json();
       setProduct(data.data.product);
@@ -96,7 +96,7 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
   async function addToCart() {
     if (!product) return;
     try {
-      const res = await fetch(`${API_BASE_URL}/cart`, getFetchOptions({
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId: product.id, quantity }),
@@ -112,7 +112,7 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
   async function removeFromCart() {
     if (!product) return;
     try {
-      const res = await fetch(`${API_BASE_URL}/cart/${product.id}`, getFetchOptions({ method: "DELETE" }));
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/cart/${product.id}`, getFetchOptions({ method: "DELETE" }));
       if (!res.ok) throw new Error();
       setCart((p) => p.filter((i) => i !== product.id));
       alert("Removed from cart!");
@@ -126,11 +126,11 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
     const isFav = favorites.includes(product.id);
     try {
       if (isFav) {
-        const res = await fetch(`${API_BASE_URL}/favorites/${product.id}`, getFetchOptions({ method: "DELETE" }));
+        const res = await fetch(`${REACT_APP_API_BASE_URL}/favorites/${product.id}`, getFetchOptions({ method: "DELETE" }));
         if (!res.ok) throw new Error();
         setFavorites((f) => f.filter((i) => i !== product.id));
       } else {
-        const res = await fetch(`${API_BASE_URL}/favorites`, getFetchOptions({
+        const res = await fetch(`${REACT_APP_API_BASE_URL}/favorites`, getFetchOptions({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ productId: product.id }),
@@ -145,7 +145,7 @@ const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
 
   const logout = async () => {
     try {
-      await fetch(`${API_BASE_URL}/auth/logout`, { method: "POST", credentials: "include" });
+      await fetch(`${REACT_APP_API_BASE_URL}/auth/logout`, { method: "POST", credentials: "include" });
       localStorage.removeItem("user");
       navigate("/");
     } catch {

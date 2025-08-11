@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css';
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState(null);
@@ -22,7 +22,7 @@ const ForgotPassword = () => {
     setMessage(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

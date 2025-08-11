@@ -15,7 +15,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/payment.css"; 
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 const getFetchOptions = (additional = {}) => ({
   credentials: "include",
@@ -54,7 +54,7 @@ export default function Payment() {
   async function loadOrderSummary() {
     try {
       setLoading(true);
-      const res = await fetch(`${API_BASE_URL}/cart`, getFetchOptions());
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions());
       if (!res.ok) throw new Error("failed to fetch cart");
       const data = await res.json();
       const items = data.data.cartItems || [];
@@ -108,7 +108,7 @@ export default function Payment() {
       };
 
       const res = await fetch(
-        `${API_BASE_URL}/orders`,
+        `${REACT_APP_API_BASE_URL}/orders`,
         getFetchOptions({
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -120,7 +120,7 @@ export default function Payment() {
 
       // clear cart on backend
       await fetch(
-        `${API_BASE_URL}/cart`,
+        `${REACT_APP_API_BASE_URL}/cart`,
         getFetchOptions({ method: "DELETE" })
       );
 
@@ -137,7 +137,7 @@ export default function Payment() {
   async function logout(e) {
     e?.preventDefault();
     try {
-      await fetch(`${API_BASE_URL}/auth/logout`, {
+      await fetch(`${REACT_APP_API_BASE_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

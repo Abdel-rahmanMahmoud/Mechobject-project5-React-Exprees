@@ -9,7 +9,7 @@ import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../styles/auth.css";
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Register = () => {
     }
 
     try {
-      const res = await fetch(`${API_BASE_URL}/auth/register`, {
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -88,7 +88,7 @@ const Register = () => {
         avatar: user.photoURL || "profile.png",
       };
 
-      const res = await fetch(`${API_BASE_URL}/auth/firebase-login`, {
+      const res = await fetch(`${REACT_APP_API_BASE_URL}/auth/firebase-login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

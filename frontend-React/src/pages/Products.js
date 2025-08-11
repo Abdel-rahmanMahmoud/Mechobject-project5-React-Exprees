@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/products.css";
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 export default function Products() {
   const navigate = useNavigate();
@@ -43,8 +43,8 @@ export default function Products() {
     }
     setIsLoggedIn(true);
     try {
-      const favRes = await fetch(`${API_BASE_URL}/favorites`, getFetchOptions());
-      const cartRes = await fetch(`${API_BASE_URL}/cart`, getFetchOptions());
+      const favRes = await fetch(`${REACT_APP_API_BASE_URL}/favorites`, getFetchOptions());
+      const cartRes = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions());
       if (favRes.ok && cartRes.ok) {
         const favData = await favRes.json();
         const cartData = await cartRes.json();
@@ -52,7 +52,7 @@ export default function Products() {
         setCart(cartData.data.cartItems.map((i) => i.productId));
       }
 
-      let url = `${API_BASE_URL}/products?page=${page}&limit=4`;
+      let url = `${REACT_APP_API_BASE_URL}/products?page=${page}&limit=4`;
       if (category) url += `&category=${encodeURIComponent(category)}`;
       const prodRes = await fetch(url);
       const prodData = await prodRes.json();
@@ -70,7 +70,7 @@ export default function Products() {
   const toggleFavorite = async (productId) => {
     const isFav = favorites.includes(productId);
     try {
-      const url = `${API_BASE_URL}/favorites${isFav ? `/${productId}` : ""}`;
+      const url = `${REACT_APP_API_BASE_URL}/favorites${isFav ? `/${productId}` : ""}`;
       const options = getFetchOptions({
         method: isFav ? "DELETE" : "POST",
         headers: isFav ? {} : { "Content-Type": "application/json" },
@@ -88,7 +88,7 @@ export default function Products() {
   const toggleCart = async (productId) => {
     const inCart = cart.includes(productId);
     try {
-      const url = `${API_BASE_URL}/cart${inCart ? `/${productId}` : ""}`;
+      const url = `${REACT_APP_API_BASE_URL}/cart${inCart ? `/${productId}` : ""}`;
       const options = getFetchOptions({
         method: inCart ? "DELETE" : "POST",
         headers: { "Content-Type": "application/json" },

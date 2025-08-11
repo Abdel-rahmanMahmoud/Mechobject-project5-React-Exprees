@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Card } from 'react-bootstrap';
 import "../styles/contact.css"
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -18,7 +18,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/contact`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

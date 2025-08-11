@@ -3,14 +3,14 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/header.css";
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 const AdminHeader = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

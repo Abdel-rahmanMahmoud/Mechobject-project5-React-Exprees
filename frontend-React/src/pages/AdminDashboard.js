@@ -4,7 +4,7 @@ import { Container, Row, Col, Nav, Table, Form, Button, Modal } from "react-boot
 import AdminHeader from "../components/AdminHeader";
 import "../styles/admin.css";
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/products?limit=100`, getFetchOptions());
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/products?limit=100`, getFetchOptions());
       const data = await response.json();
       
       if (response.ok) {
@@ -80,7 +80,7 @@ const AdminDashboard = () => {
   const loadOrders = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/orders`, getFetchOptions());
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/orders`, getFetchOptions());
       const data = await response.json();
       
       if (response.ok) {
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/products`, getFetchOptions({
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/products`, getFetchOptions({
         method: "POST",
         body: formData
       }));
@@ -159,7 +159,7 @@ const AdminDashboard = () => {
   // Handle edit product
   const handleEditProduct = async (productId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/products/${productId}`, getFetchOptions());
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/products/${productId}`, getFetchOptions());
       const data = await response.json();
 
       if (response.ok) {
@@ -206,7 +206,7 @@ const AdminDashboard = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/products/${editForm.id}`, getFetchOptions({
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/products/${editForm.id}`, getFetchOptions({
         method: "PUT",
         body: formData
       }));
@@ -232,7 +232,7 @@ const AdminDashboard = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/products/${productId}`, getFetchOptions({
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/products/${productId}`, getFetchOptions({
         method: "DELETE"
       }));
 
