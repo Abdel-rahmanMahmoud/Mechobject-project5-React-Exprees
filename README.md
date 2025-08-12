@@ -4,6 +4,12 @@
 It provides flexible authentication (including Firebase), role-based admin control, and full CRUD operations.
 
 ---
+🌐 Live Demo:
+
+Frontend: mechobject-react.onrender.com
+Backend API: mechobject-backend.onrender.com
+(Example admin account: admin@example.com / password: 123456 — for testing only; users can self-register)
+
 
 ## 🛠️ Tech Stack
 
