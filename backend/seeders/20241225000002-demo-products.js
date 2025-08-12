@@ -8,7 +8,7 @@ module.exports = {
         description: 'Energy efficient split AC with cooling capacity of 1.5 ton, perfect for medium rooms.',
         price: 450.00,
         category: 'Air Conditioning',
-        image: 'Split Air Conditioner 1.5 Ton',
+        image: 'Split Air Conditioner 1.5 Ton.jpg',
         stock: 25,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -18,7 +18,7 @@ module.exports = {
         description: 'Compact window AC unit with 1 ton cooling capacity, ideal for small rooms.',
         price: 320.00,
         category: 'Air Conditioning',
-        image: 'Window Air Conditioner 1 Ton',
+        image: 'Window Air Conditioner 1 Ton.jpg',
         stock: 15,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -28,7 +28,7 @@ module.exports = {
         description: 'Stainless steel kitchen faucet with pull-out spray and ceramic disc valves.',
         price: 85.00,
         category: 'Plumbing',
-        image: 'Kitchen Sink Faucet',
+        image: 'Kitchen Sink Faucet.jpg',
         stock: 40,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -38,7 +38,7 @@ module.exports = {
         description: 'Complete shower set with rainfall showerhead and handheld shower.',
         price: 120.00,
         category: 'Plumbing',
-        image: 'Bathroom Shower Set',
+        image: 'Bathroom Shower Set.jpg',
         stock: 30,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -48,7 +48,7 @@ module.exports = {
         description: 'ABC dry powder fire extinguisher, suitable for all types of fires.',
         price: 35.00,
         category: 'Fire Fighting',
-        image: 'Fire Extinguisher 5kg',
+        image: 'Fire Extinguisher 5kg.jpg',
         stock: 50,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -58,7 +58,7 @@ module.exports = {
         description: 'Battery operated smoke detector with loud alarm and test button.',
         price: 25.00,
         category: 'Fire Fighting',
-        image: 'https://images.pexels.com/photos/6585759/pexels-photo-6585759.jpeg?auto=compress&cs=tinysrgb&w=500',
+        image: 'Smoke Detector.jpg',
         stock: 60,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -68,7 +68,7 @@ module.exports = {
         description: 'High capacity central AC system for large buildings and offices.',
         price: 1200.00,
         category: 'Air Conditioning',
-        image: 'https://images.pexels.com/photos/6585759/pexels-photo-6585759.jpeg?auto=compress&cs=tinysrgb&w=500',
+        image: 'Central Air Conditioning Unit.jpg',
         stock: 8,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -78,7 +78,7 @@ module.exports = {
         description: 'Electric water heater with 50 liter capacity and temperature control.',
         price: 180.00,
         category: 'Plumbing',
-        image: 'https://images.pexels.com/photos/6585759/pexels-photo-6585759.jpeg?auto=compress&cs=tinysrgb&w=500',
+        image: 'Water Heater 50L.png',
         stock: 20,
         createdAt: new Date(),
         updatedAt: new Date()

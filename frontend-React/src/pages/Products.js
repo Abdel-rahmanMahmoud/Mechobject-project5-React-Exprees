@@ -172,7 +172,7 @@ export default function Products() {
                       variant="top"
                       src={
                         product.image
-                          ? `${product.image}`
+                          ? `${REACT_APP_API_IMG}/${product.image}`
                           : "https://media1.thehungryjpeg.com/thumbs2/ori_3672498_nxoe786r8fhp72m1wbao1au7dw8qehgwz9dzn8q8_white-studio-background-empty-gray-room-blank-product-display-backdr.jpg"
                       }
                       style={{ height: 200, objectFit: "cover" }}
