@@ -27,7 +27,6 @@ export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const [favorites, setFavorites] = useState([]);
   const [cart, setCart] = useState([]);
-  console.log(product.image);
   const getIdFromQuery = () => new URLSearchParams(location.search).get("id");
   const idFromQuery = getIdFromQuery();
   const id = idParam || idFromQuery;

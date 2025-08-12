@@ -173,7 +173,7 @@ export default function Products() {
                       src={
                         product.image
                           ? `${REACT_APP_API_IMG}/${product.image}`
-                          : "https://media1.thehungryjpeg.com/thumbs2/ori_3672498_nxoe786r8fhp72m1wbao1au7dw8qehgwz9dzn8q8_white-studio-background-empty-gray-room-blank-product-display-backdr.jpg"
+                          : "https://feed.muzli.cloud/muzli_feed/wp-content/uploads/2024/02/19135000/404-2.png"
                       }
                       style={{ height: 200, objectFit: "cover" }}
                     />
