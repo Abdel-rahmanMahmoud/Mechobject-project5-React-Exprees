@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Nav, Container, Row, Col, Image, Button, Spinner, Form, Card } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Spinner,
+  Form,
+  Card,
+} from "react-bootstrap";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
-import "../styles/productsDetails.css"
+import "../styles/productsDetails.css";
 
 export default function ProductDetails() {
-const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
-const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:8000/uploads/products";
+  const REACT_APP_API_BASE_URL =
+    process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
+  const REACT_APP_API_IMG =
+    process.env.REACT_APP_API_IMG || "http://localhost:8000/uploads/products";
   const navigate = useNavigate();
   const location = useLocation();
   const { id: idParam } = useParams();
@@ -14,7 +27,7 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
   const [quantity, setQuantity] = useState(1);
   const [favorites, setFavorites] = useState([]);
   const [cart, setCart] = useState([]);
-
+  console.log(product.image);
   const getIdFromQuery = () => new URLSearchParams(location.search).get("id");
   const idFromQuery = getIdFromQuery();
   const id = idParam || idFromQuery;
@@ -48,12 +61,18 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
 
   async function loadUserData() {
     try {
-      const favRes = await fetch(`${REACT_APP_API_BASE_URL}/favorites`, getFetchOptions());
+      const favRes = await fetch(
+        `${REACT_APP_API_BASE_URL}/favorites`,
+        getFetchOptions()
+      );
       if (favRes.ok) {
         const d = await favRes.json();
         setFavorites(d.data.favorites.map((f) => f.productId));
       }
-      const cartRes = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions());
+      const cartRes = await fetch(
+        `${REACT_APP_API_BASE_URL}/cart`,
+        getFetchOptions()
+      );
       if (cartRes.ok) {
         const d = await cartRes.json();
         setCart(d.data.cartItems.map((i) => i.productId));
@@ -70,7 +89,9 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
     setLoading(true);
     try {
       await loadUserData();
-      const res = await fetch(`${REACT_APP_API_BASE_URL}/products/${productId}`);
+      const res = await fetch(
+        `${REACT_APP_API_BASE_URL}/products/${productId}`
+      );
       if (!res.ok) throw new Error();
       const data = await res.json();
       setProduct(data.data.product);
@@ -97,11 +118,14 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
   async function addToCart() {
     if (!product) return;
     try {
-      const res = await fetch(`${REACT_APP_API_BASE_URL}/cart`, getFetchOptions({
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId: product.id, quantity }),
-      }));
+      const res = await fetch(
+        `${REACT_APP_API_BASE_URL}/cart`,
+        getFetchOptions({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productId: product.id, quantity }),
+        })
+      );
       if (!res.ok) throw new Error();
       setCart((p) => [...p, product.id]);
       alert(`Added ${quantity} ${product.name}(s) to cart!`);
@@ -113,7 +137,10 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
   async function removeFromCart() {
     if (!product) return;
     try {
-      const res = await fetch(`${REACT_APP_API_BASE_URL}/cart/${product.id}`, getFetchOptions({ method: "DELETE" }));
+      const res = await fetch(
+        `${REACT_APP_API_BASE_URL}/cart/${product.id}`,
+        getFetchOptions({ method: "DELETE" })
+      );
       if (!res.ok) throw new Error();
       setCart((p) => p.filter((i) => i !== product.id));
       alert("Removed from cart!");
@@ -127,15 +154,21 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
     const isFav = favorites.includes(product.id);
     try {
       if (isFav) {
-        const res = await fetch(`${REACT_APP_API_BASE_URL}/favorites/${product.id}`, getFetchOptions({ method: "DELETE" }));
+        const res = await fetch(
+          `${REACT_APP_API_BASE_URL}/favorites/${product.id}`,
+          getFetchOptions({ method: "DELETE" })
+        );
         if (!res.ok) throw new Error();
         setFavorites((f) => f.filter((i) => i !== product.id));
       } else {
-        const res = await fetch(`${REACT_APP_API_BASE_URL}/favorites`, getFetchOptions({
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ productId: product.id }),
-        }));
+        const res = await fetch(
+          `${REACT_APP_API_BASE_URL}/favorites`,
+          getFetchOptions({
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ productId: product.id }),
+          })
+        );
         if (!res.ok) throw new Error();
         setFavorites((f) => [...f, product.id]);
       }
@@ -146,7 +179,10 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
 
   const logout = async () => {
     try {
-      await fetch(`${REACT_APP_API_BASE_URL}/auth/logout`, { method: "POST", credentials: "include" });
+      await fetch(`${REACT_APP_API_BASE_URL}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
       localStorage.removeItem("user");
       navigate("/");
     } catch {
@@ -154,21 +190,31 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
     }
   };
 
-  if (loading) return (
-    <>
-      <Navbar expand="lg" className="bg-dark" variant="dark">
-        <Container>
-          <Navbar.Brand as={Link} to="/">MechObject</Navbar.Brand>
-          <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/products"> ←Back to Products</Nav.Link>
-            <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
-            <Nav.Link onClick={logout}>Logout</Nav.Link>
-          </Nav>
+  if (loading)
+    return (
+      <>
+        <Navbar expand="lg" className="bg-dark" variant="dark">
+          <Container>
+            <Navbar.Brand as={Link} to="/">
+              MechObject
+            </Navbar.Brand>
+            <Nav className="ms-auto">
+              <Nav.Link as={Link} to="/products">
+                {" "}
+                ←Back to Products
+              </Nav.Link>
+              <Nav.Link as={Link} to="/cart">
+                Cart
+              </Nav.Link>
+              <Nav.Link onClick={logout}>Logout</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+        <Container className="my-5 text-white text-center">
+          <Spinner animation="border" />
         </Container>
-      </Navbar>
-      <Container className="my-5 text-white text-center"><Spinner animation="border" /></Container>
-    </>
-  );
+      </>
+    );
 
   if (!product) return null;
 
@@ -180,10 +226,16 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
     <>
       <Navbar expand="lg" className="bg-dark" variant="dark">
         <Container>
-          <Navbar.Brand as={Link} to="/">MechObject</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            MechObject
+          </Navbar.Brand>
           <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/products">Back to Products</Nav.Link>
-            <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
+            <Nav.Link as={Link} to="/products">
+              Back to Products
+            </Nav.Link>
+            <Nav.Link as={Link} to="/cart">
+              Cart
+            </Nav.Link>
             <Nav.Link onClick={logout}>Logout</Nav.Link>
           </Nav>
         </Container>
@@ -195,7 +247,11 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
             <Row>
               <Col lg={6}>
                 <Image
-                  src={product.image ? `${REACT_APP_API_IMG}/${product.image}` : "https://via.placeholder.com/600x400"}
+                  src={
+                    product.image
+                      ? `${REACT_APP_API_IMG}/${product.image}`
+                      : "https://feed.muzli.cloud/muzli_feed/wp-content/uploads/2024/02/19135000/404-2.png"
+                  }
                   alt={product.name}
                   fluid
                   className="product-image"
@@ -205,8 +261,14 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
                 <h1 className="product-title">{product.name}</h1>
                 <div className="product-category">{product.category}</div>
                 <div className="product-price">${product.price}</div>
-                <div className={`product-stock ${isOutOfStock ? "out-of-stock" : ""}`}>
-                  {isOutOfStock ? "Out of Stock" : `${product.stock} items in stock`}
+                <div
+                  className={`product-stock ${
+                    isOutOfStock ? "out-of-stock" : ""
+                  }`}
+                >
+                  {isOutOfStock
+                    ? "Out of Stock"
+                    : `${product.stock} items in stock`}
                 </div>
                 <p className="product-description">{product.description}</p>
 
@@ -214,18 +276,61 @@ const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:800
                   <div className="quantity-selector mb-3">
                     <label>Quantity:</label>
                     <div className="d-flex align-items-center mt-2">
-                      <Button variant="primary" onClick={() => changeQuantity(-1)} disabled={quantity <= 1}>-</Button>
-                      <Form.Control type="number" value={quantity} onChange={(e) => onSetQuantity(e.target.value)} className="mx-2 quantity-input" style={{ width: "100px" }} min={1} max={product.stock} />
-                      <Button variant="primary" onClick={() => changeQuantity(1)} disabled={quantity >= product.stock}>+</Button>
+                      <Button
+                        variant="primary"
+                        onClick={() => changeQuantity(-1)}
+                        disabled={quantity <= 1}
+                      >
+                        -
+                      </Button>
+                      <Form.Control
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => onSetQuantity(e.target.value)}
+                        className="mx-2 quantity-input"
+                        style={{ width: "100px" }}
+                        min={1}
+                        max={product.stock}
+                      />
+                      <Button
+                        variant="primary"
+                        onClick={() => changeQuantity(1)}
+                        disabled={quantity >= product.stock}
+                      >
+                        +
+                      </Button>
                     </div>
                   </div>
                 )}
 
                 <div className="product-actions">
-                  {!isOutOfStock && !inCart && <Button variant="success" className="me-2" onClick={addToCart}>Add to Cart</Button>}
-                  {inCart && <Button variant="danger" className="me-2" onClick={removeFromCart}>Remove from Cart</Button>}
-                  {isOutOfStock && <Button variant="secondary" disabled>Out of Stock</Button>}
-                  <Button variant={isFavorite ? "outline-danger" : "outline-primary"} onClick={toggleFavorite}>
+                  {!isOutOfStock && !inCart && (
+                    <Button
+                      variant="success"
+                      className="me-2"
+                      onClick={addToCart}
+                    >
+                      Add to Cart
+                    </Button>
+                  )}
+                  {inCart && (
+                    <Button
+                      variant="danger"
+                      className="me-2"
+                      onClick={removeFromCart}
+                    >
+                      Remove from Cart
+                    </Button>
+                  )}
+                  {isOutOfStock && (
+                    <Button variant="secondary" disabled>
+                      Out of Stock
+                    </Button>
+                  )}
+                  <Button
+                    variant={isFavorite ? "outline-danger" : "outline-primary"}
+                    onClick={toggleFavorite}
+                  >
                     {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
                   </Button>
                 </div>
