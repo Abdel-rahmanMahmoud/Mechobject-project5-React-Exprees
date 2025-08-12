@@ -5,6 +5,7 @@ import "../styles/productsDetails.css"
 
 export default function ProductDetails() {
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:8000/uploads/products";
   const navigate = useNavigate();
   const location = useLocation();
   const { id: idParam } = useParams();
@@ -194,7 +195,7 @@ const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://loc
             <Row>
               <Col lg={6}>
                 <Image
-                  src={product.image ? `http://localhost:8000/uploads/products/${product.image}` : "https://via.placeholder.com/600x400"}
+                  src={product.image ? `${REACT_APP_API_IMG}/${product.image}` : "https://via.placeholder.com/600x400"}
                   alt={product.name}
                   fluid
                   className="product-image"

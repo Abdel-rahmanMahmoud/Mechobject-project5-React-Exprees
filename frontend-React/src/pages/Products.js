@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/products.css";
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api";
+const REACT_APP_API_IMG = process.env.REACT_APP_API_IMG || "http://localhost:8000/uploads/products";
 
 export default function Products() {
   const navigate = useNavigate();
@@ -146,7 +147,7 @@ export default function Products() {
                       variant="top"
                       src={
                         product.image
-                          ? `http://localhost:8000/uploads/products/${product.image}`
+                          ? `${REACT_APP_API_IMG}/${product.image}`
                           : "https://media1.thehungryjpeg.com/thumbs2/ori_3672498_nxoe786r8fhp72m1wbao1au7dw8qehgwz9dzn8q8_white-studio-background-empty-gray-room-blank-product-display-backdr.jpg"
                       }
                       style={{ height: 200, objectFit: "cover" }}
